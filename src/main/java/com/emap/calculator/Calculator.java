@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Calculator {
     private static final Logger log = Logger.getLogger(Calculator.class);
+    private static final double UNFOLDED_ANGLE = 180;
 
     public ShapeType defineTypeOfQuadrilateral(Quadrilateral quadrilateral) {
         List<Double> angles = getAngles(quadrilateral.getPoints());
@@ -20,19 +21,19 @@ public class Calculator {
         double fourthAngle = angles.get(3);
 
         ShapeType type = null;
-        if (firstAngle == 180 || secondAngle == 180 || thirdAngle == 180 || fourthAngle == 180) {
+        if (firstAngle == UNFOLDED_ANGLE || secondAngle == UNFOLDED_ANGLE || thirdAngle == UNFOLDED_ANGLE || fourthAngle == UNFOLDED_ANGLE) {
             type = ShapeType.TRIANGLE;
         } else {
-            if (firstAngle > 180 || secondAngle > 180 || thirdAngle > 180 || fourthAngle > 180) {
+            if (firstAngle > UNFOLDED_ANGLE || secondAngle > UNFOLDED_ANGLE || thirdAngle > UNFOLDED_ANGLE || fourthAngle > UNFOLDED_ANGLE) {
                 type = ShapeType.NONCONVEX_QUADRILATERAL;
             } else {
                 type = ShapeType.CONVEX_QUADRILATERAL;
-                if ((firstAngle + fourthAngle == 180 && firstAngle + secondAngle != 180) || (firstAngle + secondAngle == 180 && firstAngle + fourthAngle != 180)) {
+                if ((firstAngle + fourthAngle == UNFOLDED_ANGLE && firstAngle + secondAngle != UNFOLDED_ANGLE) || (firstAngle + secondAngle == UNFOLDED_ANGLE && firstAngle + fourthAngle != UNFOLDED_ANGLE)) {
                     type = ShapeType.TRAPEZIUM;
                 } else {
                     if (firstAngle == thirdAngle) {
                         type = ShapeType.RHOMBUS;
-                        if (firstAngle == 90 && thirdAngle == 90) {
+                        if (firstAngle == UNFOLDED_ANGLE / 2 && thirdAngle == UNFOLDED_ANGLE / 2) {
                             type = ShapeType.SQUARE;
                         }
                     }
@@ -85,22 +86,22 @@ public class Calculator {
         double firstSide = 0;
         double secondSiade = 0;
 
-        if (angles.get(0) == 180) {
+        if (angles.get(0) == UNFOLDED_ANGLE) {
             angle = angles.get(1);
             firstSide = getDistance(fourth, second);
             secondSiade = getDistance(second, third);
         }
-        if (angles.get(1) == 180) {
+        if (angles.get(1) == UNFOLDED_ANGLE) {
             angle = angles.get(0);
             firstSide = getDistance(first, third);
             secondSiade = getDistance(first, fourth);
         }
-        if (angles.get(2) == 180) {
+        if (angles.get(2) == UNFOLDED_ANGLE) {
             angle = angles.get(0);
             firstSide = getDistance(first, second);
             secondSiade = getDistance(first, fourth);
         }
-        if (angles.get(3) == 180) {
+        if (angles.get(3) == UNFOLDED_ANGLE) {
             angle = angles.get(0);
             firstSide = getDistance(first, third);
             secondSiade = getDistance(first, second);
@@ -123,8 +124,8 @@ public class Calculator {
         Point diadonalCrossPoint = getCrossPoint(first, second, third, fourth);
 
         double angle = Math.toDegrees(getAngelBetweenPoints(first, diadonalCrossPoint, second));
-        if (angle > 90) {
-            angle = Math.abs(angle - 180);
+        if (angle > UNFOLDED_ANGLE / 2) {
+            angle = Math.abs(angle - UNFOLDED_ANGLE);
         }
 
         double area = firstDiagonal * secondDiagonal * Math.sin(Math.toRadians(angle)) / 2;
@@ -145,10 +146,10 @@ public class Calculator {
         List<Double> angles = new ArrayList<>() {
         };
 
-        angles.add(firstAngle > 180 ? Math.abs(firstAngle - 360) : firstAngle);
-        angles.add(secondAngle > 180 ? Math.abs(secondAngle - 360) : secondAngle);
-        angles.add(thirdAngle > 180 ? Math.abs(thirdAngle - 360) : thirdAngle);
-        angles.add(fourthAngle > 180 ? Math.abs(fourthAngle - 360) : fourthAngle);
+        angles.add(firstAngle > UNFOLDED_ANGLE ? Math.abs(firstAngle - UNFOLDED_ANGLE * 2) : firstAngle);
+        angles.add(secondAngle > UNFOLDED_ANGLE ? Math.abs(secondAngle - UNFOLDED_ANGLE * 2) : secondAngle);
+        angles.add(thirdAngle > UNFOLDED_ANGLE ? Math.abs(thirdAngle - UNFOLDED_ANGLE * 2) : thirdAngle);
+        angles.add(fourthAngle > UNFOLDED_ANGLE ? Math.abs(fourthAngle - UNFOLDED_ANGLE * 2) : fourthAngle);
         return angles;
     }
 
@@ -208,5 +209,12 @@ public class Calculator {
         double crossY = first.getY() + (third.getY() - first.getY()) * Math.abs(z1) / Math.abs(z2 - z1);
 
         return new Point(crossX, crossY);
+    }
+
+    public double roundToDischarge(double value, int afterpoint) {
+        value = value * Math.pow(10, afterpoint);
+        int i = (int) Math.round(value);
+        value = (double) i / Math.pow(10, afterpoint);
+        return value;
     }
 }

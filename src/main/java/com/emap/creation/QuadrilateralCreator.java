@@ -9,15 +9,15 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuadCreator {
-    private static  final Logger log =  Logger.getLogger(QuadCreator.class);
+public class QuadrilateralCreator {
+    private static final Logger log = Logger.getLogger(QuadrilateralCreator.class);
     private final QuadrilateralDataValidator validator;
 
-    public QuadCreator(QuadrilateralDataValidator validator) {
+    public QuadrilateralCreator(QuadrilateralDataValidator validator) {
         this.validator = validator;
     }
 
-    public Quadrilateral createQuadrilateral(List<Point> points) throws DataExeption {
+    public Quadrilateral create(List<Point> points) {
         if (validator.isValid(points)) {
             log.info("Quadrilateral data is valid");
             while (points.size() > 4) {
@@ -25,10 +25,10 @@ public class QuadCreator {
                 System.out.println("34");
             }
             log.info("Quadrilateral was successfully created");
-            return new Quadrilateral(makeFormatedPointList(points));
+            return new Quadrilateral(makeFormatedPointList(points),IDGenerator.generateQuadrilateralID());
         } else {
             log.error("Point list was invalid Quadrilateral creating was failed");
-            throw new DataExeption("Point list is invalid");
+            return null;
         }
     }
 

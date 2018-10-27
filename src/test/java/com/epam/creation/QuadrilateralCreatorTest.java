@@ -1,6 +1,7 @@
 package com.epam.creation;
 
-import com.emap.creation.QuadCreator;
+import com.emap.creation.IDGenerator;
+import com.emap.creation.QuadrilateralCreator;
 import com.emap.entities.Point;
 import com.emap.entities.Quadrilateral;
 import com.emap.exeptions.DataExeption;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(DataProviderRunner.class)
-public class QuadCreatorTest {
+public class QuadrilateralCreatorTest {
     private static final QuadrilateralDataValidator validator = Mockito.mock(QuadrilateralDataValidator.class);
-    private static final QuadCreator creator = new QuadCreator(validator);
+    private static final QuadrilateralCreator creator = new QuadrilateralCreator(validator);
 
     @DataProvider
     public static Object[][] creatorDataProvider() {
@@ -42,21 +43,15 @@ public class QuadCreatorTest {
         points.add(pointArray[2]);
         points.add(pointArray[3]);
 
-        Quadrilateral expected = new Quadrilateral(points);
+        Quadrilateral expected = new Quadrilateral(points, IDGenerator.generateQuadrilateralID());
 
         Mockito.when(validator.isValid(Mockito.any(ArrayList.class)))
                 .thenReturn(true);
 
-        Quadrilateral result = null;
-
         //when
-        try {
-            result = creator.createQuadrilateral(points);
-        } catch (DataExeption dataExeption) {
-            dataExeption.printStackTrace();
-        }
+        Quadrilateral result = creator.create(points);
 
         //then
-        Assert.assertEquals(expected,result);
+        Assert.assertEquals(expected, result);
     }
 }

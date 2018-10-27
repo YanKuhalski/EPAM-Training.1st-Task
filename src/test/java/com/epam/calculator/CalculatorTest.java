@@ -1,6 +1,7 @@
 package com.epam.calculator;
 
 import com.emap.calculator.Calculator;
+import com.emap.creation.IDGenerator;
 import com.emap.entities.Point;
 import com.emap.entities.Quadrilateral;
 import com.emap.enums.ShapeType;
@@ -16,8 +17,24 @@ import java.util.List;
 
 @RunWith(DataProviderRunner.class)
 public class CalculatorTest {
-    private static final  Calculator calculator = new Calculator();
+    private static final Calculator calculator = new Calculator();
     private static final double DELTA = 0.01;
+
+    @DataProvider
+    public static Object[][] doubleProvider() {
+        return new Object[][]{
+                {2.123412, 2, 2.12},
+                {2.4321, 3, 2.432},
+                {345.2343332, 4, 345.2343},
+        };
+    }
+
+    @Test
+    @UseDataProvider(("doubleProvider"))
+    public void shouldReturnParsedDouble(double value, int numberOfzero, double expected) {
+        double result = calculator.roundToDischarge(value, numberOfzero);
+        Assert.assertEquals(Double.compare(result, expected), 0);
+    }
 
     @DataProvider
     public static Object[][] areaColculationDataProvider() {
@@ -32,14 +49,14 @@ public class CalculatorTest {
 
     @Test
     @UseDataProvider("areaColculationDataProvider")
-    public void shouldReturnAreaWhenInputIsCorrect(Point first, Point second, Point third, Point fourth, double expected) {
+    public void shouldCalculateAndReturnArea(Point first, Point second, Point third, Point fourth, double expected) {
         //given
         List<Point> points = new ArrayList<>();
         points.add(first);
         points.add(second);
         points.add(third);
         points.add(fourth);
-        Quadrilateral quadrilateral = new Quadrilateral(points);
+        Quadrilateral quadrilateral = new Quadrilateral(points, IDGenerator.generateQuadrilateralID());
 
         //when
         double result = calculator.calculateArea(quadrilateral);
@@ -61,14 +78,14 @@ public class CalculatorTest {
 
     @Test
     @UseDataProvider("perimetrColculationDataProvider")
-    public void shouldReturnPerimetrWhenInputIsCorrect(Point first, Point second, Point third, Point fourth, double expected) {
+    public void shouldCalculateAndReturnPerimetr(Point first, Point second, Point third, Point fourth, double expected) {
         //given
         List<Point> points = new ArrayList<>();
         points.add(first);
         points.add(second);
         points.add(third);
         points.add(fourth);
-        Quadrilateral quadrilateral = new Quadrilateral(points);
+        Quadrilateral quadrilateral = new Quadrilateral(points, IDGenerator.generateQuadrilateralID());
 
         //when
         double result = calculator.calculatePerimetr(quadrilateral);
@@ -90,14 +107,14 @@ public class CalculatorTest {
 
     @Test
     @UseDataProvider("typeDefineDataProvider")
-    public void shouldReturnAreaWhenInputIsCorrect(Point first, Point second, Point third, Point fourth, ShapeType expected) {
+    public void shouldDefineAndReturnShapeType(Point first, Point second, Point third, Point fourth, ShapeType expected) {
         //given
         List<Point> points = new ArrayList<>();
         points.add(first);
         points.add(second);
         points.add(third);
         points.add(fourth);
-        Quadrilateral quadrilateral = new Quadrilateral(points);
+        Quadrilateral quadrilateral = new Quadrilateral(points, IDGenerator.generateQuadrilateralID());
 
         //when
         ShapeType result = calculator.defineTypeOfQuadrilateral(quadrilateral);
