@@ -16,15 +16,15 @@ public class QuadrilateralParametrs {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(o instanceof QuadrilateralParametrs)) {
+        if (obj.getClass() != QuadrilateralParametrs.class) {
             return false;
         }
 
-        QuadrilateralParametrs parametrs = (QuadrilateralParametrs) o;
+        QuadrilateralParametrs parametrs = (QuadrilateralParametrs) obj;
 
         if (Double.compare(parametrs.area, area) != 0) {
             return false;

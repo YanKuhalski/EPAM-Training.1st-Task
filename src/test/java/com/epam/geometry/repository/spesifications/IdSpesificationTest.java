@@ -2,14 +2,14 @@ package com.epam.geometry.repository.spesifications;
 
 import com.emap.geometry.entities.Point;
 import com.emap.geometry.entities.Quadrilateral;
-import com.emap.geometry.repository.Spesification;
-import com.emap.geometry.repository.spesifications.IDSpesification;
+import com.emap.geometry.repository.spesifications.IdSpesification;
+import com.emap.geometry.repository.spesifications.Spesification;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-public class IDSpesificationTest {
+public class IdSpesificationTest {
     @Test
     public void shouldReturnTrueWhenIDIsEquals() {
         //given
@@ -19,7 +19,7 @@ public class IDSpesificationTest {
                         new Point(2, 1),
                         new Point(2, 1)),
                 4);
-        Spesification<Quadrilateral> spesification = new IDSpesification(4);
+        Spesification<Quadrilateral> spesification = new IdSpesification(4);
         //when
         boolean result = spesification.specified(quadrilateral);
 

@@ -31,16 +31,14 @@ public class Quadrilateral {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (getClass() != o.getClass()) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-
-        Quadrilateral that = (Quadrilateral) o;
-
+        Quadrilateral that = (Quadrilateral) obj;
         for (int i = 0; i < 4; i++) {
             if (!(getPoints().get(i).equals(that.getPoints().get(i)))) {
                 return false;

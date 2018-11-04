@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class SortByID implements Comparator<Quadrilateral> {
     @Override
-    public int compare(Quadrilateral o1, Quadrilateral o2) {
-        return (int) (o1.getId() - o2.getId());
+    public int compare(Quadrilateral firstQuadrilateral, Quadrilateral secondQuadrilateral) {
+        return (int) (firstQuadrilateral.getId() - secondQuadrilateral.getId());
     }
 }

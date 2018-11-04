@@ -5,9 +5,9 @@ import com.emap.geometry.entities.Point;
 import com.emap.geometry.entities.Quadrilateral;
 import com.emap.geometry.repository.QuadrilateralRepository;
 import com.emap.geometry.repository.Repository;
-import com.emap.geometry.repository.Spesification;
+import com.emap.geometry.repository.spesifications.IdSpesification;
+import com.emap.geometry.repository.spesifications.Spesification;
 import com.emap.geometry.repository.spesifications.AreaSpesification;
-import com.emap.geometry.repository.spesifications.IDSpesification;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class QuadrilateralRepositoryTest {
         repository.update(newQuad);
 
         //then
-        Assert.assertEquals(Arrays.asList(newQuad), repository.findBy(new IDSpesification(1)));
+        Assert.assertEquals(Arrays.asList(newQuad), repository.findBy(new IdSpesification(1)));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class QuadrilateralRepositoryTest {
         repository.remove(quadrilateral);
 
         //then
-        Assert.assertEquals(new ArrayList<Quadrilateral>(), repository.findBy(new IDSpesification(1)));
+        Assert.assertEquals(new ArrayList<Quadrilateral>(), repository.findBy(new IdSpesification(1)));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class QuadrilateralRepositoryTest {
         repository.add(quadrilateral);
 
         //then
-        Assert.assertEquals(Arrays.asList(quadrilateral), repository.findBy(new IDSpesification(1)));
+        Assert.assertEquals(Arrays.asList(quadrilateral), repository.findBy(new IdSpesification(1)));
     }
 
     @Test

@@ -73,7 +73,6 @@ public class Calculator {
     }
 
     private double calculateTriangleArea(Quadrilateral quadrilateral) {
-
         List<Point> points = quadrilateral.getPoints();
         Point first = points.get(0);
         Point second = points.get(1);

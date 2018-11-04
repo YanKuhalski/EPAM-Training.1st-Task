@@ -1,12 +1,11 @@
 package com.emap.geometry.repository.spesifications;
 
 import com.emap.geometry.entities.Quadrilateral;
-import com.emap.geometry.repository.Spesification;
 
-public class IDSpesification implements Spesification<Quadrilateral> {
-    private long id;
+public class IdSpesification implements Spesification<Quadrilateral> {
+       private long id;
 
-    public IDSpesification(long id) {
+    public IdSpesification(long id) {
         this.id = id;
     }
 

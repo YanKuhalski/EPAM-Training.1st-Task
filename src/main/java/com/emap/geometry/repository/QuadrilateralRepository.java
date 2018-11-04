@@ -1,6 +1,7 @@
 package com.emap.geometry.repository;
 
 import com.emap.geometry.entities.Quadrilateral;
+import com.emap.geometry.repository.spesifications.Spesification;
 import org.apache.log4j.Logger;
 
 import java.util.*;

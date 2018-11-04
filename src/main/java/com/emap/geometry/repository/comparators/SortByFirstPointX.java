@@ -6,9 +6,9 @@ import java.util.Comparator;
 
 public class SortByFirstPointX implements Comparator<Quadrilateral> {
     @Override
-    public int compare(Quadrilateral o1, Quadrilateral o2) {
-        double firstX = o1.getPoints().get(0).getX();
-        double secondX = o2.getPoints().get(0).getX();
+    public int compare(Quadrilateral firstQuadrilateral, Quadrilateral secondQuadrilateral) {
+        double firstX = firstQuadrilateral.getPoints().get(0).getX();
+        double secondX = secondQuadrilateral.getPoints().get(0).getX();
         return Double.compare(secondX, firstX);
     }
 }

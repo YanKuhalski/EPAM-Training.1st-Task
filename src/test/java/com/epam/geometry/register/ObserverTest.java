@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Map;
 
-public class RegisterTest {
+public class ObserverTest {
 
     @Test
     public void shouldUpdateData() {

@@ -2,7 +2,7 @@ package com.epam.geometry.repository.spesifications;
 
 import com.emap.geometry.entities.Point;
 import com.emap.geometry.entities.Quadrilateral;
-import com.emap.geometry.repository.Spesification;
+import com.emap.geometry.repository.spesifications.Spesification;
 import com.emap.geometry.repository.spesifications.PerimetrSpesification;
 import org.junit.Assert;
 import org.junit.Test;
