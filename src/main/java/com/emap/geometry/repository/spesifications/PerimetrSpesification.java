@@ -15,7 +15,6 @@ public class PerimetrSpesification implements Spesification<Quadrilateral> {
     public boolean specified(Quadrilateral o) {
         double currentPerimetr = calculator.calculatePerimetr(o);
         currentPerimetr = calculator.roundToDischarge(currentPerimetr, 2);
-        perimetr = calculator.roundToDischarge(perimetr, 2);
         return Double.compare(currentPerimetr, perimetr) == 0;
     }
 }

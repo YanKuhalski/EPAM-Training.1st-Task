@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class QuadrilateralCreator {
+    private static final int NORMAL_AMOUNTH_OFPOINTS = 4;
     private static final Logger log = Logger.getLogger(QuadrilateralCreator.class);
     private final QuadrilateralDataValidator validator;
 
@@ -20,12 +21,14 @@ public class QuadrilateralCreator {
     public Optional<Quadrilateral> create(List<Point> points) {
         if (validator.isValid(points)) {
             log.info("Quadrilateral data is valid");
-            while (points.size() > 4) {
+            while (points.size() > NORMAL_AMOUNTH_OFPOINTS) {
                 points.remove(points.size() - 1);
-                System.out.println("34");
             }
             log.info("Quadrilateral was successfully created");
-            return Optional.of(new Quadrilateral(makeFormatedPointList(points), IDGenerator.generateQuadrilateralID()));
+            long newId = IDGenerator.generateQuadrilateralID();
+            List<Point> formatedPoints = makeFormatedPointList(points);
+            Quadrilateral quadrilateral = new Quadrilateral(formatedPoints, newId);
+            return Optional.of(quadrilateral);
         } else {
             log.error("Point list was invalid Quadrilateral creating was failed");
             return Optional.empty();

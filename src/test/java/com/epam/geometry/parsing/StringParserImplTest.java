@@ -1,7 +1,7 @@
-package com.epam.geometry.parsing.impl;
+package com.epam.geometry.parsing;
 
 import com.emap.geometry.parsing.StringParser;
-import com.emap.geometry.parsing.impl.StringParserImpl;
+import com.emap.geometry.parsing.StringParserImpl;
 import com.emap.geometry.validation.StringValidator;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;

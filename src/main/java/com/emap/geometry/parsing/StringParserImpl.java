@@ -1,7 +1,6 @@
-package com.emap.geometry.parsing.impl;
+package com.emap.geometry.parsing;
 
 import com.emap.geometry.exeptions.ParseExeption;
-import com.emap.geometry.parsing.StringParser;
 import com.emap.geometry.validation.StringValidator;
 import org.apache.log4j.Logger;
 
@@ -20,7 +19,7 @@ public class StringParserImpl implements StringParser {
             return patseToDoubleArray(string);
         } catch (ParseExeption parseExeption) {
             log.info(parseExeption);
-            return null;
+            return new double[]{};
         }
     }
 

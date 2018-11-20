@@ -1,6 +1,5 @@
-package com.emap.geometry.reading.impl;
+package com.emap.geometry.reading;
 
-import com.emap.geometry.reading.Reader;
 import com.emap.geometry.exeptions.DataExeption;
 import org.apache.log4j.Logger;
 
@@ -16,21 +15,20 @@ public class DataReader implements Reader {
         try {
             return read(path);
         } catch (DataExeption dataExeption) {
-            dataExeption.printStackTrace();
             log.error(dataExeption);
-            return null;
+            return new ArrayList<>();
         }
     }
 
     private List<String> read(String path) throws DataExeption {
         try (FileInputStream fstream = new FileInputStream(path)) {
             List<String> strings = new ArrayList<>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-            String strLine;
-            while ((strLine = br.readLine()) != null) {
-                strings.add(strLine);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(fstream))) {
+                String strLine;
+                while ((strLine = br.readLine()) != null) {
+                    strings.add(strLine);
+                }
             }
-            br.close();
             log.info("Data was successfully read");
             return strings;
         } catch (IOException e) {

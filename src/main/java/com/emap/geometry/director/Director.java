@@ -6,7 +6,7 @@ import com.emap.geometry.creation.QuadrilateralCreator;
 import com.emap.geometry.entities.Point;
 import com.emap.geometry.entities.Quadrilateral;
 import com.emap.geometry.parsing.StringParser;
-import com.emap.geometry.reading.impl.DataReader;
+import com.emap.geometry.reading.DataReader;
 
 import java.util.ArrayList;
 import java.util.List;

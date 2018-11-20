@@ -7,19 +7,16 @@ import com.emap.geometry.repository.comparators.SortByFirstPointY;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class SortByFirstPointYTest {
+    private static final Point secondPoint = new Point(1, 1);
+    private static final Point thirdPoint = new Point(1, 0);
+    private static final Point fourthPoint = new Point(0, 0);
+
     @Test
     public void shouldSortSetByFirstPointY() {
         //given
-        Point secondPoint = new Point(1, 1);
-        Point thirdPoint = new Point(1, 0);
-        Point fourthPoint = new Point(0, 0);
-
         Quadrilateral firstQuadrilateral = new Quadrilateral(Arrays.asList(new Point(0, 4), secondPoint, thirdPoint, fourthPoint)
                 , IDGenerator.generateQuadrilateralID());
         Quadrilateral secondQuadrilateral = new Quadrilateral(Arrays.asList(new Point(0, 2), secondPoint, thirdPoint, fourthPoint)
@@ -34,10 +31,10 @@ public class SortByFirstPointYTest {
         sortdSet.addAll(list);
 
         //then
-        int counter = 0;
-        for (Quadrilateral quadrilateral : sortdSet) {
-            Assert.assertEquals(list.get(counter++), quadrilateral);
+        List<Quadrilateral> sortedList = new ArrayList<>(sortdSet);
 
-        }
+        Assert.assertEquals(list.get(0), sortedList.get(0));
+        Assert.assertEquals(list.get(1), sortedList.get(1));
+        Assert.assertEquals(list.get(2), sortedList.get(2));
     }
 }

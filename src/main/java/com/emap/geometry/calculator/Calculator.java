@@ -6,6 +6,7 @@ import com.emap.geometry.enums.ShapeType;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
@@ -89,18 +90,15 @@ public class Calculator {
             angle = angles.get(1);
             firstSide = getDistance(fourth, second);
             secondSiade = getDistance(second, third);
-        }
-        if (angles.get(1) == UNFOLDED_ANGLE) {
+        } else if (angles.get(1) == UNFOLDED_ANGLE) {
             angle = angles.get(0);
             firstSide = getDistance(first, third);
             secondSiade = getDistance(first, fourth);
-        }
-        if (angles.get(2) == UNFOLDED_ANGLE) {
+        } else if (angles.get(2) == UNFOLDED_ANGLE) {
             angle = angles.get(0);
             firstSide = getDistance(first, second);
             secondSiade = getDistance(first, fourth);
-        }
-        if (angles.get(3) == UNFOLDED_ANGLE) {
+        } else if (angles.get(3) == UNFOLDED_ANGLE) {
             angle = angles.get(0);
             firstSide = getDistance(first, third);
             secondSiade = getDistance(first, second);
@@ -142,13 +140,13 @@ public class Calculator {
         double thirdAngle = Math.toDegrees(getAngelBetweenPoints(second, third, fourth));
         double fourthAngle = Math.toDegrees(getAngelBetweenPoints(third, fourth, first));
 
-        List<Double> angles = new ArrayList<>() {
-        };
+        List<Double> angles = Arrays.asList(
+                firstAngle > UNFOLDED_ANGLE ? Math.abs(firstAngle - UNFOLDED_ANGLE * 2) : firstAngle,
+                secondAngle > UNFOLDED_ANGLE ? Math.abs(secondAngle - UNFOLDED_ANGLE * 2) : secondAngle,
+                thirdAngle > UNFOLDED_ANGLE ? Math.abs(thirdAngle - UNFOLDED_ANGLE * 2) : thirdAngle,
+                fourthAngle > UNFOLDED_ANGLE ? Math.abs(fourthAngle - UNFOLDED_ANGLE * 2) : fourthAngle
+        );
 
-        angles.add(firstAngle > UNFOLDED_ANGLE ? Math.abs(firstAngle - UNFOLDED_ANGLE * 2) : firstAngle);
-        angles.add(secondAngle > UNFOLDED_ANGLE ? Math.abs(secondAngle - UNFOLDED_ANGLE * 2) : secondAngle);
-        angles.add(thirdAngle > UNFOLDED_ANGLE ? Math.abs(thirdAngle - UNFOLDED_ANGLE * 2) : thirdAngle);
-        angles.add(fourthAngle > UNFOLDED_ANGLE ? Math.abs(fourthAngle - UNFOLDED_ANGLE * 2) : fourthAngle);
         return angles;
     }
 
